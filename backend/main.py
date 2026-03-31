@@ -16,7 +16,7 @@ setup_logging()
 tracer = setup_tracing()
 
 import structlog
-logger = structlog.get_logger("nomadnest.startup")
+logger = structlog.get_logger("futurestack.startup")
 
 # Initialize Sentry if DSN is provided
 if settings.SENTRY_DSN:
@@ -35,34 +35,41 @@ if settings.SENTRY_DSN:
         pass
 
 app = FastAPI(
-    title=settings.PROJECT_NAME,
+    title="FutureStack",
     version=settings.VERSION,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     description="""
-NomadNest AI API provides a comprehensive platform for digital nomads to discover co-living hubs, book stays, and participate in local experiences.
+FutureStack — Civic Infrastructure Tech Marketplace.
+
+Enabling communities to discover, fund, govern, and deploy infrastructure solutions
+across water, energy, AI, food security, education, and automated transport.
 
 ### Key Features:
-* **Hub Discovery**: Explore curated co-living spaces worldwide.
-* **Seamless Bookings**: Manage your stays and payments in one place.
-* **Community Intelligence**: Access AI-driven neighborhood insights and task management.
-* **Secure & Scalable**: Production-grade security with JWT rotation and rate limiting.
+* **Infrastructure Projects**: Plan, fund, build, and monitor community infrastructure.
+* **Solution Marketplace**: Discover vetted vendors across 6 verticals.
+* **DAO Governance**: Stake tokens, vote on projects, transparent treasury.
+* **Fractional Investment**: Own shares in infrastructure with booking discounts.
+* **AI Concierge**: Infrastructure planning assistant powered by Gemini.
+* **RFP System**: Communities post needs, vendors bid.
+* **Impact Dashboards**: Real-time metrics (kWh, liters, students served).
     """,
     contact={
-        "name": "NomadNest Support",
-        "url": "https://nomadnest.ai/support",
-        "email": "support@nomadnest.ai",
+        "name": "FutureStack Support",
+        "url": "https://futurestack.dev/support",
+        "email": "support@futurestack.dev",
     },
     license_info={
         "name": "Private",
     },
     openapi_tags=[
         {"name": "auth", "description": "Authentication and user identity management"},
-        {"name": "listings", "description": "Property and co-living space management"},
-        {"name": "bookings", "description": "Reservation and stay management"},
+        {"name": "infrastructure", "description": "Community infrastructure project management"},
+        {"name": "marketplace", "description": "Solution vendor marketplace"},
+        {"name": "rfp", "description": "Requests for proposals and vendor bidding"},
+        {"name": "impact", "description": "Impact metrics and dashboards"},
+        {"name": "dao", "description": "Governance, staking, and treasury"},
+        {"name": "investments", "description": "Fractional infrastructure ownership"},
         {"name": "monitoring", "description": "System health and performance metrics"},
-        {"name": "users", "description": "User profile management"},
-        {"name": "messages", "description": "Real-time messaging between users"},
-        {"name": "applications", "description": "Host application workflow and review"},
     ]
 )
 
@@ -340,8 +347,16 @@ async def startup_event():
             UserSession, AICacheEntry,
             TokenStake, TreasuryAllocation, HubFinancials, BuybackOrder,
         )
+        from backend.models_civic import (
+            InfrastructureProject, SolutionListing, ProjectSolution,
+            CommunityRFP, VendorProposal, ImpactMetric,
+        )
         from backend.database import engine
-        for tbl in [UserSession, AICacheEntry, TokenStake, TreasuryAllocation, HubFinancials, BuybackOrder]:
+        for tbl in [
+            UserSession, AICacheEntry, TokenStake, TreasuryAllocation, HubFinancials, BuybackOrder,
+            InfrastructureProject, SolutionListing, ProjectSolution,
+            CommunityRFP, VendorProposal, ImpactMetric,
+        ]:
             tbl.__table__.create(bind=engine, checkfirst=True)
     except Exception as e:
         logger.debug("dynamic_table_check", note=str(e))
@@ -356,7 +371,7 @@ async def startup_event():
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to NomadNest AI API", "version": settings.VERSION}
+    return {"message": "Welcome to FutureStack — Civic Infrastructure Tech Marketplace", "version": settings.VERSION}
 
 
 # Import and register routers
@@ -482,6 +497,13 @@ app.include_router(enrichment_router.router, prefix="/api/v1/enrichment", tags=[
 app.include_router(
     investments.router, prefix="/api/v1/investments", tags=["investments"]
 )
+
+# --- Civic Infrastructure Verticals ---
+from backend.routers import infrastructure, marketplace, rfp, impact
+app.include_router(infrastructure.router, prefix="/api/v1/infra", tags=["infrastructure"])
+app.include_router(marketplace.router, prefix="/api/v1/marketplace", tags=["marketplace"])
+app.include_router(rfp.router, prefix="/api/v1/rfp", tags=["rfp"])
+app.include_router(impact.router, prefix="/api/v1/impact", tags=["impact"])
 
 # Search
 app.include_router(search.router, prefix="/api/v1/search", tags=["search"])
