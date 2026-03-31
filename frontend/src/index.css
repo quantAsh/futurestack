@@ -1,0 +1,570 @@
+/* ═══════════════════════════════════════════════════════════════
+   FutureStack Design System — Dark Civic Infrastructure Theme
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Core palette */
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #111827;
+  --bg-card: #1a2035;
+  --bg-card-hover: #1f2847;
+  --bg-glass: rgba(26, 32, 53, 0.8);
+
+  /* Accent colors per vertical */
+  --water: #06b6d4;
+  --energy: #f59e0b;
+  --ai: #a855f7;
+  --food: #22c55e;
+  --education: #3b82f6;
+  --transport: #f43f5e;
+
+  /* Accent gradient */
+  --gradient-primary: linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7);
+  --gradient-warm: linear-gradient(135deg, #f59e0b, #f43f5e);
+  --gradient-nature: linear-gradient(135deg, #22c55e, #06b6d4);
+
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Borders */
+  --border: rgba(148, 163, 184, 0.1);
+  --border-active: rgba(6, 182, 212, 0.4);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 30px rgba(6, 182, 212, 0.15);
+
+  /* Spacing */
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Layout ────────────────────────────────────────────────── */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  width: 100%;
+}
+
+/* ─── Header ────────────────────────────────────────────────── */
+
+.header {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+}
+
+/* ─── Nav Tabs ──────────────────────────────────────────────── */
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 4px;
+}
+
+.nav-tab {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+}
+
+.nav-tab.active {
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+}
+
+/* ─── Hero Stats ────────────────────────────────────────────── */
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ─── Section Headers ───────────────────────────────────────── */
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-badge {
+  font-size: 0.75rem;
+  background: var(--bg-card-hover);
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ─── Vertical Chips ────────────────────────────────────────── */
+
+.vertical-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.vertical-chip {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.vertical-chip:hover, .vertical-chip.active {
+  border-color: transparent;
+  color: white;
+}
+
+.vertical-chip[data-vertical="water"]:hover, .vertical-chip[data-vertical="water"].active { background: var(--water); }
+.vertical-chip[data-vertical="energy"]:hover, .vertical-chip[data-vertical="energy"].active { background: var(--energy); }
+.vertical-chip[data-vertical="ai_infrastructure"]:hover, .vertical-chip[data-vertical="ai_infrastructure"].active { background: var(--ai); }
+.vertical-chip[data-vertical="food_security"]:hover, .vertical-chip[data-vertical="food_security"].active { background: var(--food); }
+.vertical-chip[data-vertical="education"]:hover, .vertical-chip[data-vertical="education"].active { background: var(--education); }
+.vertical-chip[data-vertical="transport"]:hover, .vertical-chip[data-vertical="transport"].active { background: var(--transport); }
+
+/* ─── Project Cards ─────────────────────────────────────────── */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-3px);
+}
+
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.project-icon {
+  font-size: 2rem;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.project-icon.water { background: rgba(6, 182, 212, 0.15); }
+.project-icon.energy { background: rgba(245, 158, 11, 0.15); }
+.project-icon.ai_infrastructure { background: rgba(168, 85, 247, 0.15); }
+.project-icon.food_security { background: rgba(34, 197, 94, 0.15); }
+.project-icon.education { background: rgba(59, 130, 246, 0.15); }
+.project-icon.transport { background: rgba(244, 63, 94, 0.15); }
+
+.project-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.project-location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.status-badge.planning { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+.status-badge.funding { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.status-badge.procurement { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.status-badge.construction { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+.status-badge.operational { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+.status-badge.operational .status-dot {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Funding bar */
+.funding-bar-outer {
+  height: 6px;
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 3px;
+  margin: 16px 0 8px;
+  overflow: hidden;
+}
+
+.funding-bar-inner {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--gradient-primary);
+  transition: width 1s ease;
+}
+
+.funding-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.funding-label strong {
+  color: var(--text-primary);
+}
+
+/* ─── Solution Cards ────────────────────────────────────────── */
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.solution-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.3s;
+}
+
+.solution-card:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
+}
+
+.solution-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.solution-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--water);
+}
+
+.solution-type {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--bg-card-hover);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.solution-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.rating { color: #f59e0b; font-weight: 600; }
+.verified-badge { color: var(--food); }
+
+/* ─── Impact Dashboard ──────────────────────────────────────── */
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.impact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+}
+
+.impact-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 8px 0;
+}
+
+.impact-card.water .impact-value { color: var(--water); }
+.impact-card.energy .impact-value { color: var(--energy); }
+.impact-card.food .impact-value { color: var(--food); }
+
+.impact-unit {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ─── Calculator Panel ──────────────────────────────────────── */
+
+.calc-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+.calc-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus, .form-group select:focus {
+  outline: none;
+  border-color: var(--water);
+}
+
+.btn-primary {
+  padding: 12px 28px;
+  border-radius: 10px;
+  border: none;
+  background: var(--gradient-primary);
+  color: white;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
+}
+
+.calc-results {
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.calc-results pre {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+
+/* ─── Loading ───────────────────────────────────────────────── */
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--water);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .header { padding: 12px 16px; }
+  .header-inner { flex-direction: column; gap: 12px; }
+  .nav-tabs { overflow-x: auto; width: 100%; }
+  .main-content { padding: 20px 16px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .project-grid { grid-template-columns: 1fr; }
+  .stat-value { font-size: 1.5rem; }
+}
