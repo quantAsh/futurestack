@@ -499,11 +499,13 @@ app.include_router(
 )
 
 # --- Civic Infrastructure Verticals ---
-from backend.routers import infrastructure, marketplace, rfp, impact
+from backend.routers import infrastructure, marketplace, rfp, impact, advisor, calculators
 app.include_router(infrastructure.router, prefix="/api/v1/infra", tags=["infrastructure"])
 app.include_router(marketplace.router, prefix="/api/v1/marketplace", tags=["marketplace"])
 app.include_router(rfp.router, prefix="/api/v1/rfp", tags=["rfp"])
 app.include_router(impact.router, prefix="/api/v1/impact", tags=["impact"])
+app.include_router(advisor.router, prefix="/api/v1/infra", tags=["advisor"])
+app.include_router(calculators.router, prefix="/api/v1/infra", tags=["calculators"])
 
 # Search
 app.include_router(search.router, prefix="/api/v1/search", tags=["search"])
