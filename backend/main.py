@@ -80,6 +80,7 @@ FastAPIInstrumentor.instrument_app(app, tracer_provider=tracer)
 # Create database tables
 def init_db():
     from backend import models
+    from backend import models_civic  # noqa: F401 — registers civic tables with Base.metadata
     from backend.database import engine
 
     try:
